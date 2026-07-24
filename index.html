@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualização Folha de Pagamento</title>
+</head>
+
+<body>
+    <div class="title">
+        <hr>
+        <h1>
+            Automação para Atualização de folha de pagamento
+        </h1>
+        <hr>
+    </div>
+
+    <div class="uploads">
+        <label for="uploadOrigem">Adicione aqui a planilha dos dados de origem</label>
+        <input type="file" class="uploadOrigem" id="uploadOrigem">
+        <label for="uploadDestino">Adicione aqui a planilha dos dados de destino</label>
+        <input type="file" class="uploadDestino" id="uploadDestino">
+        
+    </div>
+    <div class="logs">
+        <h2>Progresso e avisos</h2>
+        <div class="caixaLogs" id="caixaLogs">
+        
+        </div>
+        <div class="processar">
+            <button class="btnProcessar" id="btnProcessar" disabled>Processar</button>
+        </div>
+    </div>
+    <div class="download">
+        <button class="btnDownload" id="btnDownload" disabled>Baixe aqui a planilha</button>
+    </div>
+    <script type="text/javascript" src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+</body>
+
+
+
+</html>
