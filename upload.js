@@ -4,3 +4,4 @@ async function lerPlanilha(linhaInicial, arquivo, pagina) {
     const jsonArquivo = XLSX.utils.sheet_to_json(workbook.Sheets[pagina], {range: linhaInicial});
     return jsonArquivo;
 }
+
