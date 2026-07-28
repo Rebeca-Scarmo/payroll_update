@@ -12,3 +12,5 @@ async function obtem_envia_arquivos(){
         alert("Insira os dois arquivos antes de enviar")
     }
 }
+const indiceDestino = criarIndice(dadosDestino);
+const indiceOrigem  = criarIndice(dadosOrigem);
