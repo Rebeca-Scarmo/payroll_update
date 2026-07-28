@@ -10,7 +10,7 @@ function transformaCPF(cpf){
 }
 
 function transformaValor(valor){
-    if(typeof valor == "string"){
+    if(typeof valor === "string"){
         const arrayCaracteres = valor.split("");
          const arrayDigitos = arrayCaracteres.filter(function (caracter){
             if( (caracter >= "0" && caracter <="9") || (caracter == "." || caracter == ",")){
@@ -37,7 +37,7 @@ function transformarNome(nome){
         }
         return false
     })
-    const nomeTransformado = (nomeSemAcento.join("")).toLowerCase();
+    const nomeTransformado = (nomeSemAcento.join("")).toLowerCase().trim();
     return nomeTransformado;
 }
 

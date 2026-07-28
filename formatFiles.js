@@ -23,12 +23,12 @@ function padronizarLinhaDestino(linhaCrua) {
 
 async function formataArquivoOrigem(arquivoOrigem) {
     const jsonArquivoOrigem = await lerPlanilha(0, arquivoOrigem, "Planilha1");
-    const arquivoOrigemFormat = jsonArquivoOrigem.map(padronizarLinhaOrigem);
-    return arquivoOrigemFormat;
+    const dadosOrigem = jsonArquivoOrigem.map(padronizarLinhaOrigem);
+    return dadosOrigem;
 }
 
 async function formataArquivoDestino(arquivoDestino) {
     const jsonArquivoDestino = await lerPlanilha(13,arquivoDestino,"Principal");
-    const arquivoDestinoFormat = jsonArquivoDestino.map(padronizarLinhaDestino);
-    return arquivoDestinoFormat
+    const dadosDestino = jsonArquivoDestino.map(padronizarLinhaDestino);
+    return dadosDestino;
 }
