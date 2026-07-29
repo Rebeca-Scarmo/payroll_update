@@ -22,7 +22,7 @@ function transformaValor(valor){
         const valorMonetario = parseFloat(valorSemMilhar.replaceAll(",","."));
         return Math.round(valorMonetario * 100)/100;
     }else{
-        return valor;
+        return Math.round(valor * 100)/100;
     }
 
 }

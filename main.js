@@ -1,6 +1,8 @@
-document.getElementById("btnUpload").addEventListener("click", obtem_envia_arquivos);
+document.getElementById("btnProcessar").addEventListener("click", obtem_envia_arquivos);
 const inputOrigem = document.getElementById("uploadOrigem");
 const inputDestino = document.getElementById("uploadDestino");
+let indiceDestino;
+let indiceOrigem;
 
 async function obtem_envia_arquivos(){
     if((inputOrigem.files[0] != null) && (inputDestino.files[0] != null)){
@@ -8,9 +10,10 @@ async function obtem_envia_arquivos(){
             const arquivoOrigem = inputOrigem.files[0];
             const dadosDestino = await formataArquivoDestino(arquivoDestino);
             const dadosOrigem = await formataArquivoOrigem(arquivoOrigem);
+            indiceDestino = criarIndice(dadosDestino);
+            indiceOrigem = criarIndice(dadosOrigem);
+
     }else{
         alert("Insira os dois arquivos antes de enviar")
     }
 }
-const indiceDestino = criarIndice(dadosDestino);
-const indiceOrigem  = criarIndice(dadosOrigem);
