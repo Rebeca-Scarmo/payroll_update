@@ -2,18 +2,24 @@ document.getElementById("btnProcessar").addEventListener("click", obtem_envia_ar
 const inputOrigem = document.getElementById("uploadOrigem");
 const inputDestino = document.getElementById("uploadDestino");
 let indiceDestino;
-let indiceOrigem;
+let resultados;
 
-async function obtem_envia_arquivos(){
+function obtem_envia_arquivos(){
     if((inputOrigem.files[0] != null) && (inputDestino.files[0] != null)){
             const arquivoDestino = inputDestino.files[0];
             const arquivoOrigem = inputOrigem.files[0];
-            const dadosDestino = await formataArquivoDestino(arquivoDestino);
-            const dadosOrigem = await formataArquivoOrigem(arquivoOrigem);
-            indiceDestino = criarIndice(dadosDestino);
-            indiceOrigem = criarIndice(dadosOrigem);
+            processarPlanilhas(arquivoOrigem,arquivoDestino);
 
     }else{
         alert("Insira os dois arquivos antes de enviar")
     }
 }
+
+async function processarPlanilhas(arquivoOrigem, arquivoDestino) {
+    const dadosDestino = await formataArquivoDestino(arquivoDestino);
+    const dadosOrigem = await formataArquivoOrigem(arquivoOrigem);
+    indiceDestino = criarIndice(dadosDestino);
+    resultados = cruzarPlanilhas(dadosOrigem, indiceDestino);
+    //TO DO habilitar btnDownload
+}
+

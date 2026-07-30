@@ -6,19 +6,21 @@ async function lerPlanilha(linhaInicial, arquivo, pagina) {
   }
 
 
-function padronizarLinhaOrigem(linhaCrua) {
+function padronizarLinhaOrigem(linhaCrua,celula) {
   return {
     cpf: transformaCPF(linhaCrua["CPF"]),
     nome: transformarNome(linhaCrua["Nome do Funcionário"]),
     valor: transformaValor(linhaCrua["Valor"]),
+    celula: celula+2
   };
 }
 
-function padronizarLinhaDestino(linhaCrua) {
+function padronizarLinhaDestino(linhaCrua, celula) {
   return {
     cpf: transformaCPF(linhaCrua["CPF"]),
     nome: transformarNome(linhaCrua["Funcionário"]),
     valor: transformaValor(linhaCrua["Salário"]),
+    celula: celula+15
   };
 }
 
