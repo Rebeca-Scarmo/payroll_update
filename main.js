@@ -3,6 +3,8 @@ const inputOrigem = document.getElementById("uploadOrigem");
 const inputDestino = document.getElementById("uploadDestino");
 let indiceDestino;
 let resultados;
+let workbookDestino;
+let workbookOrigem;
 
 function obtem_envia_arquivos(){
     if((inputOrigem.files[0] != null) && (inputDestino.files[0] != null)){
@@ -18,8 +20,10 @@ function obtem_envia_arquivos(){
 async function processarPlanilhas(arquivoOrigem, arquivoDestino) {
     const dadosDestino = await formataArquivoDestino(arquivoDestino);
     const dadosOrigem = await formataArquivoOrigem(arquivoOrigem);
-    indiceDestino = criarIndice(dadosDestino);
-    resultados = cruzarPlanilhas(dadosOrigem, indiceDestino);
+    workbookDestino = dadosDestino.workbookDestino;
+    workbookOrigem = dadosOrigem.workbookOrigem;
+    indiceDestino = criarIndice(dadosDestino.dadosDestino);
+    resultados = cruzarPlanilhas(dadosOrigem.dadosOrigem, indiceDestino);
     //TO DO habilitar btnDownload
 }
 
