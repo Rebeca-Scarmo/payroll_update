@@ -15,16 +15,23 @@ function cruzarPlanilhas(dadosOrigem, indiceDestino){
     for(let i=0;i<dadosOrigem.length;i++){
         if(indiceDestino[dadosOrigem[i].cpf]!== undefined){
             if(indiceDestino[dadosOrigem[i].cpf].nome === dadosOrigem[i].nome){
-                consistentes.push(dadosOrigem[i]);
+                consistentes.push({
+                    origem: dadosOrigem[i],
+                    destino: indiceDestino[dadosOrigem[i].cpf]
+                });
             }else{
-                inconsistentes.push(dadosOrigem[i]);
+                inconsistentes.push({
+                    origem: dadosOrigem[i],
+                    destino: indiceDestino[dadosOrigem[i].cpf]                
+                });
             }
         }else{
             nao_encontrado.push(dadosOrigem[i]);
         }
     }
-    return {    consistentes: consistentes, 
-                inconsistentes: incosistentes, 
+    return {    
+                consistentes: consistentes, 
+                inconsistentes: inconsistentes, 
                 nao_encontrado: nao_encontrado
             };
 }
