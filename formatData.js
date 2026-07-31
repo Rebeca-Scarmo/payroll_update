@@ -1,12 +1,13 @@
 function transformaCPF(cpf){
-    const arrayCaracteres = cpf.split("");
+    const cpfString = String(cpf);
+    const arrayCaracteres = cpfString.split("");
     const arrayDigitos = arrayCaracteres.filter(function (caracter){
         if(caracter >= "0" && caracter <="9"){
             return true;
         }
         return false;
     });
-    return arrayDigitos.join("");
+    return arrayDigitos.join("").padStart(11, "0");
 }
 
 function transformaValor(valor){
