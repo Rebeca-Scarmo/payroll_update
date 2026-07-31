@@ -13,7 +13,7 @@ function padronizarLinhaOrigem(linhaCrua,indice) {
     cpf: transformaCPF(linhaCrua["CPF"]),
     nome: transformarNome(linhaCrua["Nome do Funcionário"]),
     valor: transformaValor(linhaCrua["Valor"]),
-    celula: "G"+(indice+2)
+    celula: "G"+(indice+7)
   };
 }
 
@@ -27,7 +27,7 @@ function padronizarLinhaDestino(linhaCrua, indice) {
 }
 
 async function formataArquivoOrigem(arquivoOrigem) {
-    const conteudoOrigem = await lerPlanilha(0, arquivoOrigem, "Planilha1");
+    const conteudoOrigem = await lerPlanilha(5, arquivoOrigem, "Plan1");
     const dadosOrigem = conteudoOrigem.jsonArquivo.map(padronizarLinhaOrigem);
     return {
               dadosOrigem: dadosOrigem,

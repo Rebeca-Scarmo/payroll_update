@@ -7,3 +7,7 @@ function atualizaValores(funcionarios){
         }
     }
 }
+
+function downloadPlanilha() {
+    XLSX.writeFile(workbookDestino, "planilha_atualizada.xlsx");
+}
