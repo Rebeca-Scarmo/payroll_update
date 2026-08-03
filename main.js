@@ -1,8 +1,9 @@
 document.getElementById("btnProcessar").addEventListener("click", obtem_envia_arquivos);
+document.getElementById("btnDownload").addEventListener("click", downloadPlanilha);
+document.getElementById("btnAtualizar").addEventListener("click", selecionaCheckbox);
+document.getElementById("btnCancelar").addEventListener("click",fecharModal);
 const inputOrigem = document.getElementById("uploadOrigem");
 const inputDestino = document.getElementById("uploadDestino");
-const btnDownload = document.getElementById("btnDownload");
-btnDownload.addEventListener("click", downloadPlanilha);
 let indiceDestino;
 let resultados;
 let workbookDestino;
@@ -28,10 +29,11 @@ async function processarPlanilhas(arquivoOrigem, arquivoDestino) {
     resultados = cruzarPlanilhas(dadosOrigem.dadosOrigem, indiceDestino);
     atualizaValores(resultados.consistentes);
     if(resultados.inconsistentes.length != 0){
-        let mensagem = juntaNomesInconsistentes(resultados.inconsistentes);
-        const decisao = confirm("Foram encontrados os seguintes funcionários inconsistentes: \n\n"+ mensagem+"\n Deseja atualizar os valores?");
-        if(decisao){
-            atualizaValores(resultados.inconsistentes);
+        criarModalIncosistentes(resultados.inconsistentes);
+        abrirModal();
+        const funcionariosSelecionados = selecionaCheckbox();
+        if(funcionariosSelecionados !== null){
+            atualizaValores(funcionariosSelecionados);
         }
     }
     if(resultados.nao_encontrado.length != 0){
@@ -42,19 +44,53 @@ async function processarPlanilhas(arquivoOrigem, arquivoDestino) {
     btnDownload.disabled = false;
 }
 
-function juntaNomesInconsistentes (vetor){
-    let mensagem="";
-    for(let i=0; i<vetor.length; i++){
-        mensagem += "Origem: " + vetor[i].origem.nome + "\n";
-        mensagem += "Destino: " + vetor[i].destino.nome + "\n\n";
-    }
-    return mensagem
+
+function abrirModal(){
+    document.getElementById("modal oculto").classList.remove("oculto");
 }
 
-function juntaNomesNaoEncontrados (vetor){
-    let mensagem="";
+function fecharModal(){
+    document.getElementById("modal oculto").classList.add("oculto");
+}
+
+function criarModalIncosistentes(vetor){
+    const modalMensagem = document.getElementById("modalMensagem");
+    modalMensagem.innerHTML="";
     for(let i=0; i<vetor.length; i++){
-        mensagem += (vetor[i].nome + "\n");
+        const divFuncionario = document.createElement("div");
+        divFuncionario.classList.add("funcionario");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "funcionarioCheckbox";
+        checkbox.value = vetor[i].origem.cpf;
+        checkbox.funcionario = vetor[i];
+
+        const nomeFuncionario = document.createElement("strong");
+        nomeFuncionario.textContent = vetor[i].origem.nome;
+
+        const nomeOrigem = document.createElement("p");
+        nomeOrigem.textContent = "Origem: "+vetor[i].origem.nome;
+
+        const nomeDestino = document.createElement("p");
+        nomeDestino.textContent = "Destino: "+vetor[i].destino.nome;
+
+        modalMensagem.appendChild(divFuncionario);
+        divFuncionario.appendChild(checkbox);
+        divFuncionario.appendChild(nomeFuncionario);
+        divFuncionario.appendChild(nomeOrigem);
+        divFuncionario.appendChild(nomeDestino);
     }
-    return mensagem
+ 
+}
+
+function selecionaCheckbox(){
+    const collectionCheckbox = document.getElementsByClassName("funcionarioCheckbox");
+    const selecionados = [];
+    for(let i=0; i<collectionCheckbox.length;i++){
+        if(collectionCheckbox[i].checked === true){
+            selecionados[i] = collectionCheckbox[i].funcionario;
+        }
+    }
+    return selecionados;
 }

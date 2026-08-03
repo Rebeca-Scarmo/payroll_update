@@ -177,3 +177,41 @@ button:disabled {
     }
 
 }
+
+.modal{
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.5);
+}
+
+.modalConteudo{
+    background:white;
+    width:700px;
+    max-height:80vh;
+    padding:30px;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+}
+
+.modalMensagem{
+    overflow-y:auto;
+    flex:1;
+    margin:15px 0;
+}
+
+.oculto{
+
+    display:none;
+
+}
