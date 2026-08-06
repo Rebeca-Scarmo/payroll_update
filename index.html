@@ -35,7 +35,7 @@
         <button class="btnDownload" id="btnDownload" disabled>Baixe aqui a planilha</button>
     </div>
 
-    <div class="modal oculto" id="modal oculto">
+    <div class="modal oculto" id="modal">
         <div class="modalConteudo">
             <h2>Aviso</h2>
             <div class="modalMensagem" id="modalMensagem">
@@ -47,6 +47,17 @@
             </div>
         </div>
         
+    </div>
+    <div class="modal oculto" id="modalNaoEncontrados">
+        <div class="modalConteudo">
+            <h2>Não encontrados</h2>
+            <div class="modalMensagem" id="modalMensagemNaoEncontrados">
+                <!-- Nomes serão inseridos aqui -->
+            </div>
+            <div class="modalBotoes">
+                <button class="btnOk" id="btnOk">OK</button>
+            </div>
+        </div>
     </div>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="style.css">
