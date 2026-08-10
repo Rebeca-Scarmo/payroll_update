@@ -1,5 +1,12 @@
 document.getElementById("btnProcessar").addEventListener("click", obtem_envia_arquivos);
 document.getElementById("btnDownload").addEventListener("click", downloadPlanilha);
+document.getElementById("checkboxSelecionarTodos").addEventListener("change", function (evento) {
+    const marcar = evento.target.checked;
+    const checkboxes = document.getElementsByClassName("funcionarioCheckbox");
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = marcar;
+    }
+});
 const inputOrigem = document.getElementById("uploadOrigem");
 const inputDestino = document.getElementById("uploadDestino");
 let indiceDestino;
@@ -18,27 +25,39 @@ function obtem_envia_arquivos(){
 }
 
 async function processarPlanilhas(arquivoOrigem, arquivoDestino) {
+    document.getElementById("caixaLogs").innerHTML = "";
+    adicionarLog("Lendo planilhas...");
+
     const dadosDestino = await formataArquivoDestino(arquivoDestino);
     const dadosOrigem = await formataArquivoOrigem(arquivoOrigem);
     workbookDestino = dadosDestino.workbookDestino;
     workbookOrigem = dadosOrigem.workbookOrigem;
+    adicionarLog(dadosOrigem.dadosOrigem.length + " funcionários lidos da contabilidade.");
+    adicionarLog(dadosDestino.dadosDestino.length + " funcionários lidos da planilha modelo.");
+
     indiceDestino = criarIndice(dadosDestino.dadosDestino);
     resultados = cruzarPlanilhas(dadosOrigem.dadosOrigem, indiceDestino);
+    adicionarLog(resultados.consistentes.length + " valores atualizados automaticamente.");
     atualizaValores(resultados.consistentes);
 
     if (resultados.inconsistentes.length != 0) {
+        adicionarLog(resultados.inconsistentes.length + " com nome divergente — aguardando sua confirmação.");
+        document.getElementById("checkboxSelecionarTodos").checked = false;
         criarModalIncosistentes(resultados.inconsistentes);
         abrirModal();
         const funcionariosSelecionados = await esperarDecisaoModal();
         atualizaValores(funcionariosSelecionados);
+        adicionarLog(funcionariosSelecionados.length + " confirmados e atualizados.");
     }
 
     if (resultados.nao_encontrado.length != 0) {
+        adicionarLog(resultados.nao_encontrado.length + " funcionários não encontrados na planilha modelo.");
         criarModalNaoEncontrados(resultados.nao_encontrado);
         abrirModalNaoEncontrados();
         await esperarFechamentoModalNaoEncontrados();
     }
 
+    adicionarLog("Pronto — clique em Baixar para exportar a planilha atualizada.");
     btnDownload.disabled = false;
 }
 
@@ -86,6 +105,9 @@ function criarModalIncosistentes(vetor){
         const nomeDestino = document.createElement("p");
         nomeDestino.textContent = "Destino: " + vetor[i].destino.nome;
 
+        nomeOrigem.classList.add("origem");
+        nomeDestino.classList.add("destino");
+
         modalMensagem.appendChild(divFuncionario);
         divFuncionario.appendChild(checkbox);
         divFuncionario.appendChild(nomeFuncionario);
@@ -130,4 +152,12 @@ function esperarFechamentoModalNaoEncontrados() {
             resolve();
         };
     });
+}
+
+function adicionarLog(mensagem) {
+    const caixaLogs = document.getElementById("caixaLogs");
+    const linha = document.createElement("p");
+    linha.textContent = mensagem;
+    caixaLogs.appendChild(linha);
+    caixaLogs.scrollTop = caixaLogs.scrollHeight;
 }

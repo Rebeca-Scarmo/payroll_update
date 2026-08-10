@@ -1,15 +1,19 @@
-/* ===== Paleta de cores — troque aqui se tiver a identidade oficial do cliente ===== */
 :root {
-    --azul-principal: #0d5c63;
-    --azul-escuro: #06393d;
-    --verde-destaque: #4caf7d;
-    --verde-escuro: #2f8358;
-    --cinza-texto: #33393c;
-    --cinza-claro: #f4f7f6;
-    --cinza-borda: #dde5e3;
+    --primaria: #0d9488;
+    --primaria-escura: #0f766e;
+    --destaque: #6366f1;
+    --destaque-escuro: #4f46e5;
+    --texto: #1e293b;
+    --texto-suave: #64748b;
+    --fundo: #f1f5f9;
+    --borda: #e2e8f0;
     --branco: #ffffff;
-    --vermelho-alerta: #c0392b;
-    --sombra: 0 2px 10px rgba(13, 92, 99, 0.12);
+    --tag-origem: #e0f2fe;
+    --tag-origem-texto: #0369a1;
+    --tag-destino: #fff7ed;
+    --tag-destino-texto: #c2410c;
+    --sombra: 0 4px 20px rgba(15, 23, 42, 0.08);
+    --sombra-forte: 0 20px 50px rgba(15, 23, 42, 0.25);
 }
 
 * {
@@ -19,10 +23,10 @@
 body {
     margin: 0;
     font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--cinza-claro);
-    color: var(--cinza-texto);
-    padding: 32px 16px;
-    line-height: 1.5;
+    background: linear-gradient(160deg, var(--fundo) 0%, #e6f4f2 100%);
+    color: var(--texto);
+    padding: 40px 16px;
+    line-height: 1.55;
 }
 
 /* ===== Título ===== */
@@ -34,111 +38,139 @@ body {
 
 .title hr {
     border: none;
-    height: 3px;
-    background: linear-gradient(90deg, var(--azul-principal), var(--verde-destaque));
-    border-radius: 2px;
-    margin: 12px 0;
+    height: 4px;
+    width: 80px;
+    margin: 14px auto;
+    background: linear-gradient(90deg, var(--primaria), var(--destaque));
+    border-radius: 999px;
 }
 
 .title h1 {
-    color: var(--azul-escuro);
-    font-size: 1.6rem;
-    font-weight: 700;
+    color: var(--texto);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
     margin: 8px 0;
 }
 
-/* ===== Cartões genéricos (uploads / logs) ===== */
+/* ===== Cartões genéricos ===== */
 .uploads,
 .logs {
     max-width: 720px;
-    margin: 0 auto 24px auto;
+    margin: 0 auto 20px auto;
     background: var(--branco);
-    border: 1px solid var(--cinza-borda);
-    border-radius: 12px;
-    padding: 24px;
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    padding: 28px;
     box-shadow: var(--sombra);
 }
 
 .uploads label {
     display: block;
-    font-weight: 600;
-    color: var(--azul-escuro);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--texto);
     margin-bottom: 8px;
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
 .uploads label:first-of-type {
     margin-top: 0;
 }
 
-/* Estiliza o input de arquivo nativo, sem precisar de <label> escondido */
 input[type="file"] {
     display: block;
     width: 100%;
-    padding: 10px;
-    border: 1.5px dashed var(--azul-principal);
-    border-radius: 8px;
-    background-color: var(--cinza-claro);
-    color: var(--cinza-texto);
+    padding: 12px;
+    border: 1.5px dashed #94a3b8;
+    border-radius: 12px;
+    background-color: var(--fundo);
+    color: var(--texto-suave);
     cursor: pointer;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 input[type="file"]:hover {
-    border-color: var(--verde-destaque);
-    background-color: #eef6f4;
+    border-color: var(--primaria);
+    background-color: #ecfdf5;
 }
 
-/* Botão "Escolher arquivo" embutido no input, em navegadores baseados em Chromium/Firefox */
 input[type="file"]::file-selector-button {
-    padding: 8px 16px;
-    margin-right: 12px;
+    padding: 9px 18px;
+    margin-right: 14px;
     border: none;
-    border-radius: 6px;
-    background-color: var(--azul-principal);
+    border-radius: 999px;
+    background-color: var(--primaria);
     color: var(--branco);
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: background-color 0.15s ease;
 }
 
 input[type="file"]::file-selector-button:hover {
-    background-color: var(--azul-escuro);
+    background-color: var(--primaria-escura);
 }
 
 /* ===== Logs ===== */
 .logs h2 {
-    color: var(--azul-escuro);
-    font-size: 1.1rem;
+    color: var(--texto);
+    font-size: 1rem;
+    font-weight: 700;
     margin-top: 0;
+    margin-bottom: 14px;
 }
 
 .caixaLogs {
-    min-height: 80px;
-    max-height: 260px;
+    min-height: 60px;
+    max-height: 220px;
     overflow-y: auto;
-    background-color: var(--cinza-claro);
-    border: 1px solid var(--cinza-borda);
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 0.9rem;
-    margin-bottom: 16px;
+    background-color: var(--fundo);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    margin-bottom: 18px;
 }
 
-/* ===== Botões principais ===== */
+.caixaLogs p {
+    margin: 0 0 6px 0;
+    padding-left: 14px;
+    position: relative;
+    color: var(--texto-suave);
+}
+
+.caixaLogs p::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--primaria);
+}
+
+.caixaLogs p:last-child {
+    color: var(--texto);
+    font-weight: 600;
+}
+
+/* ===== Botões ===== */
 button {
     font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 12px 24px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 13px 26px;
     border: none;
-    border-radius: 8px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.15s ease, transform 0.05s ease;
+    transition: transform 0.08s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 button:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
 }
 
 .btnProcessar,
@@ -147,19 +179,21 @@ button:active {
     width: 100%;
     max-width: 720px;
     margin: 0 auto 16px auto;
-    background-color: var(--azul-principal);
+    background: linear-gradient(90deg, var(--primaria), var(--primaria-escura));
     color: var(--branco);
+    box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
 }
 
 .btnProcessar:hover,
 .btnDownload:hover {
-    background-color: var(--azul-escuro);
+    box-shadow: 0 10px 24px rgba(13, 148, 136, 0.4);
 }
 
 button:disabled {
-    background-color: #b7c4c2 !important;
-    color: #6f7c7a;
+    background: #cbd5e1 !important;
+    color: #94a3b8;
     cursor: not-allowed;
+    box-shadow: none !important;
 }
 
 .download {
@@ -171,50 +205,84 @@ button:disabled {
 .modal {
     position: fixed;
     inset: 0;
-    background-color: rgba(6, 57, 61, 0.55);
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(3px);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 20px;
     z-index: 1000;
+    animation: fadeIn 0.15s ease;
 }
 
 .modal.oculto {
     display: none;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
 .modalConteudo {
     background-color: var(--branco);
-    border-radius: 12px;
-    padding: 24px;
+    border-radius: 20px;
     width: 100%;
-    max-width: 480px;
-    max-height: 80vh;
+    max-width: 540px;
+    max-height: 82vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--sombra-forte);
+    animation: slideUp 0.2s ease;
+    overflow: hidden;
 }
 
 .modalConteudo h2 {
-    color: var(--azul-escuro);
-    margin-top: 0;
-    border-bottom: 2px solid var(--verde-destaque);
-    padding-bottom: 8px;
+    color: var(--texto);
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin: 0;
+    padding: 24px 28px 18px 28px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.selecionarTodos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--destaque-escuro);
+    border-bottom: 1px solid var(--borda);
+    background-color: #f8fafc;
+    cursor: pointer;
+}
+
+.selecionarTodos input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--destaque);
+    cursor: pointer;
 }
 
 .modalMensagem {
     overflow-y: auto;
-    margin-bottom: 16px;
+    padding: 8px 28px;
     flex: 1;
 }
 
-/* Cada bloco de funcionário dentro do modal de inconsistentes */
 .funcionario {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid var(--cinza-borda);
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--borda);
 }
 
 .funcionario:last-child {
@@ -222,72 +290,85 @@ button:disabled {
 }
 
 .funcionario input[type="checkbox"] {
-    margin-top: 4px;
+    margin-top: 3px;
     width: 18px;
     height: 18px;
-    accent-color: var(--verde-destaque);
+    accent-color: var(--primaria);
     cursor: pointer;
     flex-shrink: 0;
 }
 
+.funcionario > div {
+    flex: 1;
+}
+
 .funcionario strong {
     display: block;
-    color: var(--azul-escuro);
+    color: var(--texto);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
 }
 
 .funcionario p {
-    margin: 2px 0;
-    font-size: 0.85rem;
-    color: #5a6260;
+    display: inline-block;
+    margin: 0 6px 4px 0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
 }
 
-/* Nomes simples no modal de não encontrados */
-.modalMensagem p {
-    margin: 6px 0;
-    padding: 6px 8px;
-    background-color: var(--cinza-claro);
-    border-radius: 6px;
+.funcionario p.origem {
+    background-color: var(--tag-origem);
+    color: var(--tag-origem-texto);
+}
+
+.funcionario p.destino {
+    background-color: var(--tag-destino);
+    color: var(--tag-destino-texto);
+}
+
+.modalMensagem > p {
+    margin: 8px 0;
+    padding: 12px 14px;
+    background-color: var(--fundo);
+    border-radius: 10px;
+    font-size: 0.9rem;
 }
 
 .modalBotoes {
     display: flex;
     gap: 12px;
     justify-content: flex-end;
+    padding: 18px 28px;
+    border-top: 1px solid var(--borda);
+    background-color: #f8fafc;
 }
 
 .btnAtualizar,
 .btnOk {
-    background-color: var(--verde-destaque);
+    background: linear-gradient(90deg, var(--primaria), var(--primaria-escura));
     color: var(--branco);
-}
-
-.btnAtualizar:hover,
-.btnOk:hover {
-    background-color: var(--verde-escuro);
 }
 
 .btnCancelar {
     background-color: var(--branco);
-    color: var(--cinza-texto);
-    border: 1.5px solid var(--cinza-borda);
+    color: var(--texto-suave);
+    border: 1.5px solid var(--borda);
 }
 
 .btnCancelar:hover {
-    background-color: var(--cinza-claro);
+    background-color: var(--fundo);
 }
 
 /* ===== Responsivo ===== */
 @media (max-width: 480px) {
-    body {
-        padding: 16px 10px;
-    }
-    .uploads, .logs {
-        padding: 16px;
-    }
-    .modalBotoes {
-        flex-direction: column-reverse;
-    }
-    .modalBotoes button {
-        width: 100%;
-    }
+    body { padding: 20px 10px; }
+    .uploads, .logs { padding: 18px; }
+    .modalConteudo h2,
+    .selecionarTodos,
+    .modalMensagem,
+    .modalBotoes { padding-left: 18px; padding-right: 18px; }
+    .modalBotoes { flex-direction: column-reverse; }
+    .modalBotoes button { width: 100%; }
 }
