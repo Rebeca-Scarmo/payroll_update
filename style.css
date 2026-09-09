@@ -1,0 +1,423 @@
+:root {
+    --primaria: #0d9488;
+    --primaria-escura: #0f766e;
+    --destaque: #6366f1;
+    --destaque-escuro: #4f46e5;
+    --texto: #1e293b;
+    --texto-suave: #64748b;
+    --fundo: #f1f5f9;
+    --borda: #e2e8f0;
+    --branco: #ffffff;
+    --tag-origem: #e0f2fe;
+    --tag-origem-texto: #0369a1;
+    --tag-destino: #fff7ed;
+    --tag-destino-texto: #c2410c;
+    --sombra: 0 4px 20px rgba(15, 23, 42, 0.08);
+    --sombra-forte: 0 20px 50px rgba(15, 23, 42, 0.25);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(160deg, var(--fundo) 0%, #e6f4f2 100%);
+    color: var(--texto);
+    padding: 40px 16px;
+    line-height: 1.55;
+}
+
+/* ===== Título ===== */
+.title {
+    max-width: 720px;
+    margin: 0 auto 32px auto;
+    text-align: center;
+}
+
+.title hr {
+    border: none;
+    height: 4px;
+    width: 80px;
+    margin: 14px auto;
+    background: linear-gradient(90deg, var(--primaria), var(--destaque));
+    border-radius: 999px;
+}
+
+.title h1 {
+    color: var(--texto);
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin: 8px 0;
+}
+
+/* ===== Cartões genéricos ===== */
+.uploads,
+.logs {
+    max-width: 720px;
+    margin: 0 auto 20px auto;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: var(--sombra);
+}
+
+.uploads label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--texto);
+    margin-bottom: 8px;
+    margin-top: 18px;
+}
+
+.uploads label:first-of-type {
+    margin-top: 0;
+}
+
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 1.5px dashed #94a3b8;
+    border-radius: 12px;
+    background-color: var(--fundo);
+    color: var(--texto-suave);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+input[type="file"]:hover {
+    border-color: var(--primaria);
+    background-color: #ecfdf5;
+}
+
+input[type="file"]::file-selector-button {
+    padding: 9px 18px;
+    margin-right: 14px;
+    border: none;
+    border-radius: 999px;
+    background-color: var(--primaria);
+    color: var(--branco);
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--primaria-escura);
+}
+
+/* ===== Logs ===== */
+.logs h2 {
+    color: var(--texto);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 14px;
+}
+
+.caixaLogs {
+    min-height: 60px;
+    max-height: 220px;
+    overflow-y: auto;
+    background-color: var(--fundo);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+}
+
+.caixaLogs p {
+    margin: 0 0 6px 0;
+    padding-left: 14px;
+    position: relative;
+    color: var(--texto-suave);
+}
+
+.caixaLogs p::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--primaria);
+}
+
+.caixaLogs p:last-child {
+    color: var(--texto);
+    font-weight: 600;
+}
+
+/* ===== Botões ===== */
+button {
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 13px 26px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: transform 0.08s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.btnProcessar,
+.btnDownload {
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 16px auto;
+    background: linear-gradient(90deg, var(--primaria), var(--primaria-escura));
+    color: var(--branco);
+    box-shadow: 0 8px 20px rgba(13, 148, 136, 0.3);
+}
+
+.btnProcessar:hover,
+.btnDownload:hover {
+    box-shadow: 0 10px 24px rgba(13, 148, 136, 0.4);
+}
+
+button:disabled {
+    background: #cbd5e1 !important;
+    color: #94a3b8;
+    cursor: not-allowed;
+    box-shadow: none !important;
+}
+
+.download {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+/* ===== Modais ===== */
+.modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+    animation: fadeIn 0.15s ease;
+}
+
+.modal.oculto {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modalConteudo {
+    background-color: var(--branco);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 540px;
+    max-height: 82vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--sombra-forte);
+    animation: slideUp 0.2s ease;
+    overflow: hidden;
+}
+
+.modalConteudo h2 {
+    color: var(--texto);
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin: 0;
+    padding: 24px 28px 18px 28px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.selecionarTodos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--destaque-escuro);
+    border-bottom: 1px solid var(--borda);
+    background-color: #f8fafc;
+    cursor: pointer;
+}
+
+.selecionarTodos input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--destaque);
+    cursor: pointer;
+}
+
+.modalMensagem {
+    overflow-y: auto;
+    padding: 8px 28px;
+    flex: 1;
+}
+
+.funcionario {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+.funcionario:last-child {
+    border-bottom: none;
+}
+
+.funcionario input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primaria);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.funcionario > div {
+    flex: 1;
+}
+
+.funcionario strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+}
+
+.funcionario p {
+    display: inline-block;
+    margin: 0 6px 4px 0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.funcionario p.origem {
+    background-color: var(--tag-origem);
+    color: var(--tag-origem-texto);
+}
+
+.funcionario p.destino {
+    background-color: var(--tag-destino);
+    color: var(--tag-destino-texto);
+}
+
+.modalMensagem > p {
+    margin: 8px 0;
+    padding: 12px 14px;
+    background-color: var(--fundo);
+    border-radius: 10px;
+    font-size: 0.9rem;
+}
+
+.modalBotoes {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    padding: 18px 28px;
+    border-top: 1px solid var(--borda);
+    background-color: #f8fafc;
+}
+
+.btnAtualizar,
+.btnOk {
+    background: linear-gradient(90deg, var(--primaria), var(--primaria-escura));
+    color: var(--branco);
+}
+
+.btnCancelar {
+    background-color: var(--branco);
+    color: var(--texto-suave);
+    border: 1.5px solid var(--borda);
+}
+
+.btnCancelar:hover {
+    background-color: var(--fundo);
+}
+
+/* ===== Formulário de cadastro ===== */
+.formCadastro {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.campoFormulario {
+    padding: 10px 0;
+}
+
+.campoFormulario label {
+    display: block;
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--texto);
+    margin-bottom: 6px;
+}
+
+.campoFormulario input,
+.campoFormulario select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid var(--borda);
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--texto);
+    background-color: var(--branco);
+}
+
+.campoFormulario input:focus,
+.campoFormulario select:focus {
+    outline: none;
+    border-color: var(--primaria);
+}
+
+.campoFormulario input[readonly] {
+    background-color: var(--fundo);
+    color: var(--texto-suave);
+    cursor: not-allowed;
+}
+
+.campoFormulario input:invalid:not(:placeholder-shown),
+.campoFormulario select:invalid {
+    border-color: #dc2626;
+}
+
+/* ===== Responsivo ===== */
+@media (max-width: 480px) {
+    body { padding: 20px 10px; }
+    .uploads, .logs { padding: 18px; }
+    .modalConteudo h2,
+    .selecionarTodos,
+    .modalMensagem,
+    .modalBotoes { padding-left: 18px; padding-right: 18px; }
+    .modalBotoes { flex-direction: column-reverse; }
+    .modalBotoes button { width: 100%; }
+}

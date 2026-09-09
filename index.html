@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo isgv sem fundo.png">
+    <title>Atualização Folha de Pagamento</title>
+</head>
+
+<body>
+    <div class="title">
+        <hr>
+        <h1>
+            Automação para Atualização de folha de pagamento
+        </h1>
+        <hr>
+    </div>
+
+    <div class="uploads">
+        <label for="uploadOrigem">Adicione aqui a planilha dos dados de origem</label>
+        <input type="file" class="uploadOrigem" id="uploadOrigem">
+        <label for="uploadDestino">Adicione aqui a planilha dos dados de destino</label>
+        <input type="file" class="uploadDestino" id="uploadDestino">
+        
+    </div>
+    <div class="logs">
+        <h2>Progresso e avisos</h2>
+        <div class="caixaLogs" id="caixaLogs">
+        
+        </div>
+        <div class="processar">
+            <button class="btnProcessar" id="btnProcessar">Processar</button>
+        </div>
+    </div>
+    <div class="download">
+        <button class="btnDownload" id="btnDownload" disabled>Baixe aqui a planilha</button>
+    </div>
+
+    <div class="modal oculto" id="modal">
+        <div class="modalConteudo">
+            <h2>Aviso</h2>
+            <label class="selecionarTodos">
+                <input type="checkbox" id="checkboxSelecionarTodos">
+                Selecionar todos
+            </label>
+            <div class="modalMensagem" id="modalMensagem">
+                <!-- Mensagem será inserida aqui -->
+            </div>
+            <div class="modalBotoes">
+                <button class="btnAtualizar" id="btnAtualizar">Atualizar</button>
+                <button class="btnCancelar" id="btnCancelar">Cancelar</button>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal oculto" id="modalNaoEncontrados">
+        <div class="modalConteudo">
+            <h2>Não encontrados</h2>
+            <label class="selecionarTodos">
+                <input type="checkbox" id="checkboxSelecionarTodosNaoEncontrados">
+                Selecionar todos para adicionar
+            </label>
+            <div class="modalMensagem" id="modalMensagemNaoEncontrados">
+                <!-- Funcionários não encontrados serão inseridos aqui -->
+            </div>
+            <div class="modalBotoes">
+                <button class="btnOk" id="btnOk">Adicionar selecionados</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal oculto" id="modalCadastro">
+        <div class="modalConteudo">
+            <h2>Cadastrar funcionário</h2>
+            <form class="formCadastro" id="formCadastro">
+                <div class="modalMensagem">
+                    <div class="campoFormulario">
+                        <label for="campoNomeCadastro">Funcionário</label>
+                        <input type="text" id="campoNomeCadastro" readonly>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoCpfCadastro">CPF</label>
+                        <input type="text" id="campoCpfCadastro" readonly>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoSalarioCadastro">Salário</label>
+                        <input type="text" id="campoSalarioCadastro" readonly>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoTipoCadastro">Tipo</label>
+                        <select id="campoTipoCadastro" required>
+                            <option value="F">F - Física</option>
+                            <option value="J">J - Jurídica</option>
+                        </select>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoBancoCadastro">Banco</label>
+                        <input type="text" id="campoBancoCadastro" required>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoAgenciaCadastro">Agência-DV Agência</label>
+                        <input type="text" id="campoAgenciaCadastro" required>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoTipoContaCadastro">Tipo Conta</label>
+                        <select id="campoTipoContaCadastro" required>
+                            <option value="CC">C - Corrente</option>
+                            <option value="CP">P - Poupança</option>
+                        </select>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoContaCadastro">Conta</label>
+                        <input type="text" id="campoContaCadastro" required>
+                    </div>
+                    <div class="campoFormulario">
+                        <label for="campoDvContaCadastro">DV conta</label>
+                        <input type="text" id="campoDvContaCadastro" required>
+                    </div>
+                </div>
+                <div class="modalBotoes">
+                    <button type="submit" class="btnAtualizar">Salvar</button>
+                    <button type="button" class="btnCancelar" id="btnCancelarCadastro">Pular este</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="formatData.js"></script>
+    <script src="formatFiles.js"></script>
+    <script src="compare.js"></script>
+    <script src="update.js"></script>
+    <script src="main.js"></script>
+</body>
+
+
+
+</html>
