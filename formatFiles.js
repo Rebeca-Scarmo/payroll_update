@@ -1,11 +1,20 @@
 async function lerPlanilha(linhaInicial, arquivo, pagina) {
     const bytes = await arquivo.arrayBuffer();
     const workbook = XLSX.read(bytes, {type: 'array'});
-    const jsonArquivo = XLSX.utils.sheet_to_json(workbook.Sheets[pagina], {range: linhaInicial});
+    const jsonArquivoCru = XLSX.utils.sheet_to_json(workbook.Sheets[pagina], {range: linhaInicial});
+    const jsonArquivo = jsonArquivoCru.map(normalizarChavesLinha);
     return {
               jsonArquivo: jsonArquivo, 
               workbook: workbook};
   }
+
+function normalizarChavesLinha(linhaCrua) {
+    const linhaNormalizada = {};
+    for (const chave in linhaCrua) {
+        linhaNormalizada[chave.trim()] = linhaCrua[chave];
+    }
+    return linhaNormalizada;
+}
 
 
 function padronizarLinhaOrigem(linhaCrua,indice) {
