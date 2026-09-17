@@ -166,7 +166,7 @@ button {
     border: none;
     border-radius: 999px;
     cursor: pointer;
-    transition: transform 0.08s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+    transition: transform 0.08s ease, box-shadow 0.15s ease, opacity 0.15s ease, background 0.15s ease;
 }
 
 button:active {
@@ -194,6 +194,7 @@ button:disabled {
     color: #94a3b8;
     cursor: not-allowed;
     box-shadow: none !important;
+    transform: none !important;
 }
 
 .download {
@@ -251,6 +252,14 @@ button:disabled {
     border-bottom: 1px solid var(--borda);
 }
 
+/* Texto de apoio logo abaixo do título (ex: aviso do modal de zerar valores) */
+.modalConteudo > p {
+    margin: 0;
+    padding: 16px 28px 0 28px;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
 .selecionarTodos {
     display: flex;
     align-items: center;
@@ -262,6 +271,11 @@ button:disabled {
     border-bottom: 1px solid var(--borda);
     background-color: #f8fafc;
     cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.selecionarTodos:hover {
+    background-color: #eef2ff;
 }
 
 .selecionarTodos input {
@@ -273,20 +287,29 @@ button:disabled {
 
 .modalMensagem {
     overflow-y: auto;
-    padding: 8px 28px;
+    overflow-x: hidden;
+    padding: 10px 20px;
     flex: 1;
 }
 
+/* Cada funcionário vira um "cartão" de lista — antes só tinha uma linha
+   embaixo, o que ficava muito plano e, sem um wrapper interno consistente,
+   quebrava o alinhamento em alguns modais. */
 .funcionario {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--borda);
+    gap: 14px;
+    padding: 14px;
+    margin: 6px 0;
+    border-radius: 14px;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+    min-width: 0;
 }
 
-.funcionario:last-child {
-    border-bottom: none;
+.funcionario:hover {
+    background-color: var(--fundo);
+    border-color: var(--borda);
 }
 
 .funcionario input[type="checkbox"] {
@@ -298,8 +321,14 @@ button:disabled {
     flex-shrink: 0;
 }
 
-.funcionario > div {
+/* Pega o último elemento do card (o texto), seja ele um <div> com várias
+   linhas ou um <strong> solto — assim o layout não depende de cada função
+   em main.js montar a mesma estrutura interna, e nomes compridos quebram
+   a linha em vez de estourar o modal. */
+.funcionario > *:last-child {
     flex: 1;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .funcionario strong {
@@ -349,6 +378,12 @@ button:disabled {
 .btnOk {
     background: linear-gradient(90deg, var(--primaria), var(--primaria-escura));
     color: var(--branco);
+    box-shadow: 0 6px 16px rgba(13, 148, 136, 0.28);
+}
+
+.btnAtualizar:hover,
+.btnOk:hover {
+    box-shadow: 0 8px 20px rgba(13, 148, 136, 0.38);
 }
 
 .btnCancelar {
@@ -370,7 +405,13 @@ button:disabled {
 }
 
 .campoFormulario {
-    padding: 10px 0;
+    padding: 10px 8px;
+    border-radius: 12px;
+    transition: background-color 0.15s ease;
+}
+
+.campoFormulario:focus-within {
+    background-color: var(--fundo);
 }
 
 .campoFormulario label {
@@ -391,6 +432,7 @@ button:disabled {
     font-size: 0.9rem;
     color: var(--texto);
     background-color: var(--branco);
+    transition: border-color 0.15s ease;
 }
 
 .campoFormulario input:focus,
@@ -416,6 +458,7 @@ button:disabled {
     .uploads, .logs { padding: 18px; }
     .modalConteudo h2,
     .selecionarTodos,
+    .modalConteudo > p,
     .modalMensagem,
     .modalBotoes { padding-left: 18px; padding-right: 18px; }
     .modalBotoes { flex-direction: column-reverse; }
