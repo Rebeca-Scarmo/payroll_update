@@ -124,6 +124,23 @@
             </form>
         </div>
     </div>
+    <div class="modal oculto" id="modalSemCorrespondencia">
+        <div class="modalConteudo">
+            <h2>Sem correspondência na origem</h2>
+            <p>Estes funcionários estão na planilha modelo, mas não vieram na planilha da contabilidade deste mês. O valor dos selecionados será zerado.</p>
+            <label class="selecionarTodos">
+                <input type="checkbox" id="checkboxSelecionarTodosSemCorrespondencia" checked>
+                Selecionar todos
+            </label>
+            <div class="modalMensagem" id="modalMensagemSemCorrespondencia">
+                <!-- Funcionários serão inseridos aqui -->
+            </div>
+            <div class="modalBotoes">
+                <button class="btnAtualizar" id="btnZerar">Zerar selecionados</button>
+                <button class="btnCancelar" id="btnCancelarZerar">Não zerar nenhum</button>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <script src="formatData.js"></script>

@@ -31,6 +31,7 @@ function padronizarLinhaDestino(linhaCrua, indice) {
   return {
     cpf: transformaCPF(linhaCrua["CPF"]),
     nome: transformarNome(linhaCrua["Funcionário"]),
+    nomeOriginal: linhaCrua["Funcionário"],
     valor: transformaValor(linhaCrua["Salário"]),
     celula: "Q"+(indice+15)
   };

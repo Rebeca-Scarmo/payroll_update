@@ -14,6 +14,13 @@ document.getElementById("checkboxSelecionarTodosNaoEncontrados").addEventListene
         checkboxes[i].checked = marcar;
     }
 });
+document.getElementById("checkboxSelecionarTodosSemCorrespondencia").addEventListener("change", function (evento) {
+    const marcar = evento.target.checked;
+    const checkboxes = document.getElementsByClassName("semCorrespondenciaCheckbox");
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = marcar;
+    }
+});
 const inputOrigem = document.getElementById("uploadOrigem");
 const inputDestino = document.getElementById("uploadDestino");
 let indiceDestino;
@@ -66,6 +73,19 @@ async function processarPlanilhas(arquivoOrigem, arquivoDestino) {
         abrirModalNaoEncontrados();
         await esperarFechamentoModalNaoEncontrados();
     }
+
+    if (resultados.sem_correspondencia.length != 0) {
+        adicionarLog(resultados.sem_correspondencia.length + " funcionários do destino não vieram na origem — aguardando sua confirmação para zerar.");
+        document.getElementById("checkboxSelecionarTodosSemCorrespondencia").checked = true;
+        criarModalSemCorrespondencia(resultados.sem_correspondencia);
+        abrirModalSemCorrespondencia();
+        const funcionariosZerados = await esperarDecisaoModalSemCorrespondencia();
+        zerarValores(funcionariosZerados);
+        adicionarLog(funcionariosZerados.length + " valores zerados.");
+    }
+
+    ordenarFuncionariosDestino();
+    adicionarLog("Funcionários reordenados em ordem alfabética.");
 
     adicionarLog("Pronto — clique em Baixar para exportar a planilha atualizada.");
     btnDownload.disabled = false;
@@ -281,6 +301,63 @@ function adicionarLinhaDestino(funcionario, dadosForm, linha) {
     definirCelula(sheet, "O" + linha, dadosForm.conta, "s");
     definirCelula(sheet, "P" + linha, dadosForm.dvConta, "s");
     definirCelula(sheet, "Q" + linha, funcionario.valor, "n");
+}
+
+// ===== Zerar valor de funcionários sem correspondência na origem =====
+
+function criarModalSemCorrespondencia(vetor){
+    const modalMensagem = document.getElementById("modalMensagemSemCorrespondencia");
+    modalMensagem.innerHTML = "";
+    for (let i = 0; i < vetor.length; i++) {
+        const divFuncionario = document.createElement("div");
+        divFuncionario.classList.add("funcionario");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "semCorrespondenciaCheckbox";
+        checkbox.checked = true;
+        checkbox.funcionario = vetor[i];
+
+        const nomeFuncionario = document.createElement("strong");
+        nomeFuncionario.textContent = vetor[i].nomeOriginal;
+
+        modalMensagem.appendChild(divFuncionario);
+        divFuncionario.appendChild(checkbox);
+        divFuncionario.appendChild(nomeFuncionario);
+    }
+}
+
+function abrirModalSemCorrespondencia(){
+    document.getElementById("modalSemCorrespondencia").classList.remove("oculto");
+}
+
+function fecharModalSemCorrespondencia(){
+    document.getElementById("modalSemCorrespondencia").classList.add("oculto");
+}
+
+function esperarDecisaoModalSemCorrespondencia() {
+    return new Promise(function(resolve) {
+        document.getElementById("btnZerar").onclick = function() {
+            const selecionados = selecionaSemCorrespondenciaCheckbox();
+            fecharModalSemCorrespondencia();
+            resolve(selecionados);
+        };
+        document.getElementById("btnCancelarZerar").onclick = function() {
+            fecharModalSemCorrespondencia();
+            resolve([]);
+        };
+    });
+}
+
+function selecionaSemCorrespondenciaCheckbox(){
+    const collectionCheckbox = document.getElementsByClassName("semCorrespondenciaCheckbox");
+    const selecionados = [];
+    for (let i = 0; i < collectionCheckbox.length; i++) {
+        if (collectionCheckbox[i].checked === true) {
+            selecionados.push(collectionCheckbox[i].funcionario);
+        }
+    }
+    return selecionados;
 }
 
 function adicionarLog(mensagem) {
