@@ -126,6 +126,9 @@ function criarModalIncosistentes(vetor){
         checkbox.value = vetor[i].origem.cpf;
         checkbox.funcionario = vetor[i];
 
+        const info = document.createElement("div");
+        info.classList.add("funcionarioInfo");
+
         const nomeFuncionario = document.createElement("strong");
         nomeFuncionario.textContent = vetor[i].origem.nome;
 
@@ -138,11 +141,13 @@ function criarModalIncosistentes(vetor){
         nomeOrigem.classList.add("origem");
         nomeDestino.classList.add("destino");
 
-        modalMensagem.appendChild(divFuncionario);
+        info.appendChild(nomeFuncionario);
+        info.appendChild(nomeOrigem);
+        info.appendChild(nomeDestino);
+
         divFuncionario.appendChild(checkbox);
-        divFuncionario.appendChild(nomeFuncionario);
-        divFuncionario.appendChild(nomeOrigem);
-        divFuncionario.appendChild(nomeDestino);
+        divFuncionario.appendChild(info);
+        modalMensagem.appendChild(divFuncionario);
     }
 }
 
@@ -174,6 +179,7 @@ function criarModalNaoEncontrados(vetor){
         checkbox.funcionario = vetor[i];
 
         const info = document.createElement("div");
+        info.classList.add("funcionarioInfo");
 
         const nome = document.createElement("strong");
         nome.textContent = vetor[i].nomeOriginal;
@@ -318,12 +324,16 @@ function criarModalSemCorrespondencia(vetor){
         checkbox.checked = true;
         checkbox.funcionario = vetor[i];
 
+        const info = document.createElement("div");
+        info.classList.add("funcionarioInfo");
+
         const nomeFuncionario = document.createElement("strong");
         nomeFuncionario.textContent = vetor[i].nomeOriginal;
+        info.appendChild(nomeFuncionario);
 
-        modalMensagem.appendChild(divFuncionario);
         divFuncionario.appendChild(checkbox);
-        divFuncionario.appendChild(nomeFuncionario);
+        divFuncionario.appendChild(info);
+        modalMensagem.appendChild(divFuncionario);
     }
 }
 

@@ -321,11 +321,10 @@ button:disabled {
     flex-shrink: 0;
 }
 
-/* Pega o último elemento do card (o texto), seja ele um <div> com várias
-   linhas ou um <strong> solto — assim o layout não depende de cada função
-   em main.js montar a mesma estrutura interna, e nomes compridos quebram
-   a linha em vez de estourar o modal. */
-.funcionario > *:last-child {
+/* Todo o texto de um funcionário (nome, tags de origem/destino, etc.)
+   fica dentro de um .funcionarioInfo — assim o card cresce certo e o
+   texto quebra linha, não importa quantos <p>/<strong> tenha dentro. */
+.funcionarioInfo {
     flex: 1;
     min-width: 0;
     overflow-wrap: break-word;
